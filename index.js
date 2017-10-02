@@ -6,16 +6,16 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 
 // autoredirect any request from http to https
-// if(process.env.NODE_ENV !== 'localhost') {
-//   app.use (function (req, res, next) {
-//     var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
-//     if (schema === 'https') {
-//       next();
-//     } else {
-//       res.redirect('https://' + req.headers.host + req.url);
-//     }
-//   });
-// }
+if(process.env.NODE_ENV !== 'localhost') {
+  app.use (function (req, res, next) {
+    var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
+    if (schema === 'https') {
+      next();
+    } else {
+      res.redirect('https://' + req.headers.host + req.url);
+    }
+  });
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
