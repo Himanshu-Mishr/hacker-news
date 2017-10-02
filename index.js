@@ -30,8 +30,8 @@ app.get('/app', function (req, res) {
 
 
 app.get('/', function(request, response) {
-  response.send('<code>Node.js</code>')
-})
+  response.send('<code>Node.js App</code>')
+});
 
 app.post('/extract-content', require("./apipartials/extractor"));
 
