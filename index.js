@@ -20,14 +20,15 @@ if(process.env.NODE_ENV !== 'localhost') {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
+
 app.set('port', (process.env.PORT || 5000));
 
 // static path for create app
 app.use('/app', express.static(path.join(__dirname, '/app/build')));
+
 app.get('/app', function (req, res) {
   res.sendFile(path.join(__dirname, '/app/build', 'index.html'));
 });
-
 
 app.get('/', function(request, response) {
   response.send('<code>Node.js App</code>')
