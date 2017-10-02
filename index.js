@@ -20,6 +20,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
+app.set('port', (process.env.PORT || 5000));
 
 // static path for create app
 app.use('/app', express.static(path.join(__dirname, '/app/build')));
@@ -34,7 +35,6 @@ app.get('/', function(request, response) {
 
 app.post('/extract-content', require("./apipartials/extractor"));
 
-var port = process.env.PORT || 8000;
-app.listen(port, function() {
-  console.log('Node app is running on port', port);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
