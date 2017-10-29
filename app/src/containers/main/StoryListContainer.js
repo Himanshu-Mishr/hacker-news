@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import StoryItem from '../../components/StoryItem';
-import {List, ListItem, ListItemText, Avatar, Icon} from 'material-ui';
+import {List, ListItem, ListItemText, Avatar, Icon, LinearProgress} from 'material-ui';
+import './StoryListContainer.css';
 
 import {
   fetchStoryListAction
@@ -61,11 +62,7 @@ class StoryListContainer extends Component {
 
     if(this.state.list.length === 0) {
       return (
-        <div>
-          <div>
-            This is loading page... Add better icon here.
-          </div>          
-        </div>
+        <LinearProgress />
       );
     } else {
       return (

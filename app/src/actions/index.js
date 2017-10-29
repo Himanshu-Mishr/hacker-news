@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 import {
   SET_STORY_MODE, 
@@ -64,11 +65,25 @@ export const fetchStoryListAction = function () {
 };
 
 
+// return default value for alredy viewed stories
+export const getMarkStoryAsViewed = function() {
+  const cookies = new Cookies();
+  return cookies.get('alreadyViewed') || [];
+};
+
+
 /**
  * mark story as read
  * @param {String} id story id
  */
 export const markStoryAsViewed = function(id) {
+
+  const cookies = new Cookies();
+  
+  const list = cookies.get('alreadyViewed') || [];
+  list.push(id);
+  cookies.set('alreadyViewed', list);
+
   return function action(dispatch) {
     dispatch({type : MARK_STORY_VIEWED, payload : id});
   }

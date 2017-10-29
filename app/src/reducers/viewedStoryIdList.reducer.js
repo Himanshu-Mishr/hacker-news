@@ -3,7 +3,9 @@ import {
   MARK_STORY_UNVIEWED
 } from '../constants';
 
-export default (state=[], action) => {
+import {getMarkStoryAsViewed} from '../actions';
+
+export default (state=getMarkStoryAsViewed(), action) => {
 
   switch(action.type) {
     case MARK_STORY_VIEWED : {
