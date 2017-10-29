@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CommentItem from '../../components/CommentItem';
 import { List } from 'material-ui';
-
+import './CommentModeContainer.css';
 
 @connect((store, action) => {
   return {
@@ -35,7 +35,7 @@ class CommentModeContainer extends Component {
   render() {
 
     return (
-      <div>
+      <div className="comment-view">
         {this.getComments()}
       </div>
     );

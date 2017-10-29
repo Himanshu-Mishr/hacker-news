@@ -10,7 +10,10 @@ import {
   MARK_STORY_UNVIEWED,
   SET_CURRENT_STORY,
   SET_READER_MODE, 
-  SET_DEFAULT_READER_MODE
+  SET_DEFAULT_READER_MODE,
+  FETCH_STORY_OBJECT_REQUEST,
+  FETCH_STORY_OBJECT_SUCCESS, 
+  FETCH_STORY_OBJECT_FAILURE
 } from '../constants';
 
 /**
@@ -114,3 +117,21 @@ export const setDefaultReaderModeAction = function() {
     dispatch({type : SET_DEFAULT_READER_MODE});
   }
 };
+
+
+
+export const FetchStoryObjectAction = function (storyId) {
+  return function action(dispatch) {
+
+    dispatch({type : FETCH_STORY_OBJECT_REQUEST, id : storyId});
+    axios.get(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
+    .then((response) => {
+      dispatch({type : FETCH_STORY_OBJECT_SUCCESS, id : storyId, payload : response.data});
+    })
+    .catch((error) => {
+      dispatch({type : FETCH_STORY_OBJECT_FAILURE, id : storyId, error : error});
+    });
+
+  };
+};
+

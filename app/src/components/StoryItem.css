@@ -19,13 +19,3 @@
   height: 7px; 
   position: relative;
 }
-
-
-.already-viewed {
-  opacity: 0.5;
-}
-
-.currently-viewing {
-  border-left : 5px solid black !important;
-  opacity: 0.5;
-}

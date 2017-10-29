@@ -30,8 +30,10 @@ app.get('/app', function (req, res) {
   res.sendFile(path.join(__dirname, '/app/build', 'index.html'));
 });
 
+
+app.use('/', express.static(path.join(__dirname, '/public')));
 app.get('/', function(request, response) {
-  response.send('<code>Node.js App</code>')
+  response.sendFile(path.join(__dirname, '/public', 'index.html'));
 });
 
 app.post('/extract-content', require("./apipartials/extractor"));

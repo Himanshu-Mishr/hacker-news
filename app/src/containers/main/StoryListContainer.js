@@ -13,46 +13,76 @@ import {
   }
 })
 class StoryListContainer extends Component {
-  
+
+  constructor() {
+    super();
+    this.state = {
+      list : [],
+      skip : 0,
+      limit : 10,
+      storiesVisible : []
+    }
+  }
+
+  // init
   componentDidMount() {
     this.props.dispatch(fetchStoryListAction());
   }
 
-  getItemList() {
+
+  // iterate and make list of story components
+  getStoryList() {
     let list = [];
-    for(let i = 0; i < this.props.storyIdList.list.length&&i < 10; ++i) {
-      list.push(<StoryItem key={i} storyId={this.props.storyIdList.list[i]} />);
+    for(var i = 0; i < this.state.storiesVisible.length; ++i) {
+      list.push(<StoryItem key={this.state.storiesVisible[i]} storyId={this.state.storiesVisible[i]} />);
     }
     return list;
   }
 
 
+  // update component when id list is fetched
+  componentWillReceiveProps(newProps) {
+    // when fetching is stopped and there is error during fetching
+    if(!newProps.storyIdList.isFetching && !newProps.storyIdList.error) {
+      // load inital default no. of story items
+      const storiesVisible = newProps.storyIdList.list.slice(this.state.skip, this.state.limit+this.state.skip);
+      this.setState({list : newProps.storyIdList.list, storiesVisible});
+    }
+  }
+
+  handleLoadNext() {
+    const newSkip = this.state.skip + 10;
+    const storiesVisible = this.state.storiesVisible.concat(this.props.storyIdList.list.slice(newSkip, this.state.limit+newSkip));
+    this.setState({skip : newSkip, storiesVisible});
+  }
+
+
   render() {
 
-    if(this.props.storyIdList.isFetching) {
+    if(this.state.list.length === 0) {
       return (
         <div>
-          Loading...
+          <div>
+            This is loading page... Add better icon here.
+          </div>          
         </div>
       );
     } else {
       return (
-
         <List>
-          {this.getItemList()}
-          <ListItem button divider onClick={() => this.handleLoadNext(10)}>
-              <div style={{flex:1}} />
-              <Avatar>
-                  <Icon color="action">arrow_downward</Icon>
-              </Avatar>
-              <ListItemText primary="Load more" />
+          {this.getStoryList()}
+          <ListItem button divider onClick={() => this.handleLoadNext()}>
+            <div style={{flex:1}} />
+            <Avatar>
+                <Icon color="action">arrow_downward</Icon>
+            </Avatar>
+            <ListItemText primary="Load more" />
           </ListItem>
         </List>
-      );      
+      );
     }
-
-
   }
+
 }
 
 export default StoryListContainer;

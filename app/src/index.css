@@ -2,4 +2,5 @@ body {
   /* bug fix : mysterious bottom margin from space */
   margin-bottom: 0px; 
   font-family: 'Roboto', 'sans-serif';
+  font-size: 90%;
 }

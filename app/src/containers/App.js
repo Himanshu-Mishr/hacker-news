@@ -14,11 +14,11 @@ class App extends Component {
           <Grid item xs={12} sm={4} style={{overflowY:'auto',height:'100vh',padding:'0px'}}>
             <MainContainer />
           </Grid>
-          <Hidden xsDown>
+          {/* <Hidden xsDown> */}
             <Grid item sm={8} style={{height:'100vh',overflowY:'auto',padding:'0px'}}>
               <ReaderContainer />
             </Grid>
-          </Hidden>
+          {/* </Hidden> */}
         </Grid>
       </div>
     );

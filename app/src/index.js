@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import blue from 'material-ui/colors/blue';
@@ -9,19 +8,20 @@ import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 
-console.table(store.getState());
-store.subscribe(function() {
-  console.table(store.getState());
-});
 
+// to override default theme palette
 const theme = createMuiTheme({
   palette: {
     primary: blue,
-    // type: 'dark'
   }
 });
 
+// store.subscribe(() => {
+//   let {currentlyViewingStory, viewedStoryIdList} = store.getState();
+//   console.table({currentlyViewingStory, viewedStoryIdList});
+// });
 
+// mounting react app
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Paper } from 'material-ui';
+import { Button, Paper, Hidden } from 'material-ui';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import newspaper from '../../newspaper.svg';
@@ -44,6 +44,11 @@ class ReaderHeader extends Component {
     return (
       <Paper style={{ height:'48px',width:"100%",flex:1,flexGrow:1,zIndex:1,position:'sticky',top:'0px'}}>
         <div style={{paddingTop:'10px'}} >
+          <Hidden smUp>
+            <IconButton aria-label="close dialog" onClick={this.props.dialogCloseClickHandler} target='_blank'>
+              <Icon color="action">arrow_backward</Icon>
+            </IconButton>     
+          </Hidden>
           <span style={{fontSize:'120%',paddingLeft:'16px'}}>
             {this.props.currentlyViewingStory.title} &nbsp;
           </span>
