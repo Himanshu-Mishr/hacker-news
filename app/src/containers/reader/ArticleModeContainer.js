@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {Button, Icon, Paper, Typography, Grid} from 'material-ui';
+import {Button, Icon, Paper, Typography, Grid, Divider} from 'material-ui';
 import './ArticleModeContainer.css';
 import { LinearProgress } from 'material-ui/Progress';
 
@@ -63,7 +63,7 @@ class ArticleModeContainer extends Component {
   getStoryInfo() {
     if(this.state.content) {
       return (
-        <Paper style={{width:"100%",paddingTop:'10px'}}>
+        <div style={{width:"100%",paddingTop:'10px'}}>
           <table style={{paddingLeft:'10px'}}>
             <tbody>
               <tr>
@@ -88,7 +88,7 @@ class ArticleModeContainer extends Component {
               </tr>              
             </tbody>
           </table>
-        </Paper>
+        </div>
       );
     } else {
       return (<div></div>);
@@ -108,6 +108,7 @@ class ArticleModeContainer extends Component {
     return (
       <div className="article-view">
         {this.getStoryInfo()}
+        <Divider light />
         <div>
         {this.state.content}
         </div>
