@@ -6,6 +6,12 @@ import CommentModeContainer from './CommentModeContainer';
 import { Dialog, Hidden } from 'material-ui';
 import Slide from 'material-ui/transitions/Slide';
 
+
+import {
+  setCurrentlyViewingStoryAction
+} from '../../actions';
+
+
 @connect((store, action) => {
   return {
     readerMode : store.readerMode,
@@ -36,8 +42,10 @@ class ReaderContainer extends Component {
     }
   }
 
+  // unset currently viewing story config 
   handleRequestClose() {
     this.setState({open : false});
+    // this.props.dispatch(setCurrentlyViewingStoryAction({}));
   }
   
 

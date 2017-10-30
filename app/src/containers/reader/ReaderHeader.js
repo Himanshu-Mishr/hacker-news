@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Paper, Hidden, AppBar, Typography, Toolbar } from 'material-ui';
+import { Button, Paper, Hidden } from 'material-ui';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import newspaper from '../../newspaper.svg';

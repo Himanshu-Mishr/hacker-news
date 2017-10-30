@@ -3,10 +3,22 @@ import { connect } from 'react-redux';
 import StoryItem from '../../components/StoryItem';
 import {List, ListItem, ListItemText, Avatar, Icon, LinearProgress} from 'material-ui';
 import './StoryListContainer.css';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 
 import {
   fetchStoryListAction
 } from '../../actions';
+
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    background: theme.palette.background.paper,
+  },
+});
+
 
 @connect((store, action) => {
   return {
@@ -15,14 +27,20 @@ import {
 })
 class StoryListContainer extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       list : [],
       skip : 0,
       limit : 10,
       storiesVisible : []
     }
+    const { classes } = props;
+    this.classes = classes;
+    // Notes : Don't know why we need this. So I have removed it. 
+    // this.propTypes = {
+    //   classes: PropTypes.object.isRequired,
+    // };
   }
 
   // init
@@ -66,7 +84,7 @@ class StoryListContainer extends Component {
       );
     } else {
       return (
-        <List>
+        <List className={this.classes.root}>
           {this.getStoryList()}
           <ListItem button divider onClick={() => this.handleLoadNext()}>
             <div style={{flex:1}} />
@@ -82,4 +100,4 @@ class StoryListContainer extends Component {
 
 }
 
-export default StoryListContainer;
+export default withStyles(styles)(StoryListContainer);

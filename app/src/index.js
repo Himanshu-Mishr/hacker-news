@@ -13,6 +13,7 @@ import store from './store';
 const theme = createMuiTheme({
   palette: {
     primary: blue,
+    type : 'dark'
   }
 });
 

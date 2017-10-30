@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { ListItem, ListItemText, Grid, Icon } from 'material-ui';
+import { ListItem, ListItemText, Grid, Icon, Typography } from 'material-ui';
 
 import './Story.css';
 
@@ -73,7 +73,9 @@ class Story extends Component {
                   <Icon color="action">whatshot</Icon>
               </Grid>
               <Grid style={{textAlign:'center'}}>
+                <Typography type="body2">
                   {this.props.story.score}
+                </Typography>
               </Grid>
           </Grid>
       </ListItem>

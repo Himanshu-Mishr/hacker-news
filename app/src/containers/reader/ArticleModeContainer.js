@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {Button, Icon, Paper, Typography, Grid, Divider} from 'material-ui';
+import {Button, Icon, Typography, Divider} from 'material-ui';
 import './ArticleModeContainer.css';
 import { LinearProgress } from 'material-ui/Progress';
 
@@ -24,7 +24,7 @@ class ArticleModeContainer extends Component {
 
     if(!storyUrl) return;
     
-    this.setState({isFetching : true});
+      this.setState({isFetching : true});
       axios.post('/extract-content', {
         url : storyUrl
       })
@@ -50,9 +50,10 @@ class ArticleModeContainer extends Component {
       });
   }
 
-  componentWillReceiveProps(newProps) {
-    this.loadContent(newProps.currentlyViewingStory.url);
-  }
+  // NOTE : Don't know why this was here.
+  // componentWillReceiveProps(newProps) {
+  //   this.loadContent(newProps.currentlyViewingStory.url);
+  // }
 
   componentDidMount() {
     if(this.props.currentlyViewingStory) {
