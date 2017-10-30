@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReaderHeader from './ReaderHeader';
-import ReaderModeContainer from './ReaderModeContainer';
+import ArticleModeContainer from './ArticleModeContainer';
 import CommentModeContainer from './CommentModeContainer';
-import { Dialog, AppBar, Toolbar, IconButton, Icon, Typography, Button, Hidden } from 'material-ui';
+import { Dialog, Hidden } from 'material-ui';
 import Slide from 'material-ui/transitions/Slide';
 
 @connect((store, action) => {
@@ -22,9 +22,9 @@ class ReaderContainer extends Component {
     };
   }
 
-  getReaderModeContainer() {
+  getArticleModeContainer() {
     if(this.props.readerMode === 'article') {
-      return (<ReaderModeContainer />);
+      return (<ArticleModeContainer />);
     } else {
       return (<CommentModeContainer />)
     }
@@ -44,10 +44,13 @@ class ReaderContainer extends Component {
   render() {
     return (
       <div>
+        {/* for bigger screen like desktop and tablet */}
         <Hidden xsDown>
           <ReaderHeader dialogCloseClickHandler={() => {this.handleRequestClose()}} />
-          {this.getReaderModeContainer()}
+          {this.getArticleModeContainer()}
         </Hidden>
+
+        {/* for smaller screen : dialog container will open */}
         <Hidden smUp>
           <Dialog
             fullScreen
@@ -56,7 +59,7 @@ class ReaderContainer extends Component {
             transition={<Slide direction="left" />}
           >
             <ReaderHeader dialogCloseClickHandler={() => {this.handleRequestClose()}} />
-            {this.getReaderModeContainer()}
+            {this.getArticleModeContainer()}
           </Dialog>
         </Hidden>        
       </div>

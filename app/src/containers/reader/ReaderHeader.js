@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Paper, Hidden } from 'material-ui';
+import { Button, Paper, Hidden, AppBar, Typography, Toolbar } from 'material-ui';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import newspaper from '../../newspaper.svg';
@@ -31,6 +31,9 @@ class ReaderHeader extends Component {
     }
   }
 
+  /**
+   * Sticky Appbar with only items on it.
+   */
   render() {
 
     if(!this.props.currentlyViewingStory.id) {
@@ -40,25 +43,22 @@ class ReaderHeader extends Component {
       );
     }
 
-
     return (
-      <Paper style={{ height:'48px',width:"100%",flex:1,flexGrow:1,zIndex:1,position:'sticky',top:'0px'}}>
+      <Paper style={{ height:'48px',width:"100%",zIndex:1,position:'sticky',top:'0px'}}>
+        {/* Action item container */}
         <div style={{paddingTop:'10px'}} >
+          {/* Back button to visible only on mobile devices */}
           <Hidden smUp>
-            <IconButton aria-label="close dialog" onClick={this.props.dialogCloseClickHandler} target='_blank'>
+            <IconButton aria-label="close dialog" onClick={this.props.dialogCloseClickHandler} target='_blank' style={{marginTop:'-10px'}}>
               <Icon color="action">arrow_backward</Icon>
             </IconButton>     
           </Hidden>
-          <span style={{fontSize:'120%',paddingLeft:'16px'}}>
-            {this.props.currentlyViewingStory.title} &nbsp;
-          </span>
-          <span style={{fontSize:'90%'}}>
-            by {this.props.currentlyViewingStory.by}
-          </span>
+
+          {/* Action button : open in new tab and view comments */}
           <span style={{float:'right',marginTop:'-10px'}}>
             <IconButton aria-label="open in new window" href={this.props.currentlyViewingStory.url} target='_blank'>
               <Icon color="action">open_in_new</Icon>
-            </IconButton>          
+            </IconButton>
             {this.getModeChangeButton()}
           </span>
         </div>
