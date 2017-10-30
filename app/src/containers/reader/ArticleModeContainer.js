@@ -106,9 +106,9 @@ class ArticleModeContainer extends Component {
     }
 
     return (
-      <div>
+      <div className="article-view">
         {this.getStoryInfo()}
-        <div className="article-view">
+        <div>
         {this.state.content}
         </div>
       </div>
