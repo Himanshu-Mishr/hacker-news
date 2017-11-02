@@ -7,7 +7,8 @@ import './Story.css';
 
 import {
   setCurrentlyViewingStoryAction,
-  markStoryAsViewed
+  markStoryAsViewed,
+  setReaderModeAction
 } from '../actions';
 
 
@@ -23,6 +24,13 @@ class Story extends Component {
   viewStory() {
     this.props.dispatch(setCurrentlyViewingStoryAction(this.props.story));
     this.props.dispatch(markStoryAsViewed(this.props.story.id));
+
+    // this.props.story
+    // The type of item. One of "job", "story", "comment", "poll", or "pollopt".
+    if(this.props.story.type !== 'story') {
+      this.props.dispatch(setReaderModeAction('comment'));
+    }
+
   }
 
 
