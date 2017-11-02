@@ -107,13 +107,13 @@ class ArticleModeContainer extends Component {
     }
 
     return (
-      <div className="article-view">
+      <Typography className="article-view">
         {this.getStoryInfo()}
         <Divider light />
         <div>
         {this.state.content}
         </div>
-      </div>
+      </Typography>
 
     );
   }

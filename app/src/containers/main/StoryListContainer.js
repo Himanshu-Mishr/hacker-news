@@ -14,7 +14,6 @@ import {
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
     background: theme.palette.background.paper,
   },
 });
@@ -32,7 +31,7 @@ class StoryListContainer extends Component {
     this.state = {
       list : [],
       skip : 0,
-      limit : 10,
+      limit : 20,
       storiesVisible : []
     }
     const { classes } = props;
@@ -70,7 +69,7 @@ class StoryListContainer extends Component {
   }
 
   handleLoadNext() {
-    const newSkip = this.state.skip + 10;
+    const newSkip = this.state.skip + 20;
     const storiesVisible = this.state.storiesVisible.concat(this.props.storyIdList.list.slice(newSkip, this.state.limit+newSkip));
     this.setState({skip : newSkip, storiesVisible});
   }
