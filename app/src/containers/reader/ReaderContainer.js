@@ -8,7 +8,6 @@ import Slide from 'material-ui/transitions/Slide';
 
 
 import {
-  setCurrentlyViewingStoryAction,
   unsetCurrentlyViewingStoryAction
 } from '../../actions';
 

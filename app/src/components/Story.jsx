@@ -31,7 +31,10 @@ class Story extends Component {
     if(this.props.story.type !== 'story') {
       this.props.dispatch(setReaderModeAction('comment'));
     } else {
-      this.props.dispatch(setReaderModeAction('article'));
+      let title = (this.props.story.title || '').toLowerCase();
+      if(title.indexOf('ask hn') > -1) {
+        this.props.dispatch(setReaderModeAction('comment'));
+      }
     }
 
   }
