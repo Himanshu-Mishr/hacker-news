@@ -102,13 +102,19 @@ export const unMarkStoryAsViewed = function(id) {
 };
 
 
+
+function setCurrentlyViewingStoryDispatcher(dispatch, story) {
+  dispatch({type : SET_CURRENT_STORY, payload : story});
+}
+
+
 /**
  * set currently viewing story
  * @param {string} mode 
  */
 export const setCurrentlyViewingStoryAction = function(story) {
   return function action(dispatch, getState) {
-    dispatch({type : SET_CURRENT_STORY, payload : story});
+    setCurrentlyViewingStoryDispatcher(dispatch, story);
    };
 };
 
@@ -124,13 +130,17 @@ export const unsetCurrentlyViewingStoryAction = function() {
 
 
 
+function setReaderModeDispatcher(dispatch, mode) {
+  dispatch({type : SET_READER_MODE, payload : mode});
+}
+
 /**
  * set mode dispatch action function
  * @param {string} mode 
  */
 export const setReaderModeAction = function(mode) {
   return function action(dispatch, getState) {
-    dispatch({type : SET_READER_MODE, payload : mode});
+    setReaderModeDispatcher(dispatch, mode);
    };
 };
 
@@ -145,7 +155,7 @@ export const setDefaultReaderModeAction = function() {
 };
 
 
-
+// fetches a story object
 export const FetchStoryObjectAction = function (storyId) {
   return function action(dispatch) {
 
@@ -161,3 +171,35 @@ export const FetchStoryObjectAction = function (storyId) {
   };
 };
 
+
+// fetchs and sets/dispatchs other required action
+export const LoadStoryObjectAction = function (storyId) {
+  return function action(dispatch) {
+
+    dispatch({type : FETCH_STORY_OBJECT_REQUEST, id : storyId});
+    axios.get(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
+    .then((response) => {
+      dispatch({type : FETCH_STORY_OBJECT_SUCCESS, id : storyId, payload : response.data});
+
+      const story = response.data;
+
+      // set current story
+      setCurrentlyViewingStoryDispatcher(dispatch, story);
+
+      // set reader mode
+      if(story.type !== 'story') {
+        setReaderModeDispatcher(dispatch, 'comment');
+      } else {
+        let title = (story.title || '').toLowerCase();
+        if(title.indexOf('ask hn') > -1) {
+          setReaderModeDispatcher(dispatch, 'comment');
+        }
+      }
+
+    })
+    .catch((error) => {
+      dispatch({type : FETCH_STORY_OBJECT_FAILURE, id : storyId, error : error});
+    });
+
+  };
+};

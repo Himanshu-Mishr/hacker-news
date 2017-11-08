@@ -5,10 +5,12 @@ import ArticleModeContainer from './ArticleModeContainer';
 import CommentModeContainer from './CommentModeContainer';
 import { Dialog, Hidden } from 'material-ui';
 import Slide from 'material-ui/transitions/Slide';
-
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import {
-  unsetCurrentlyViewingStoryAction
+  unsetCurrentlyViewingStoryAction,
+  LoadStoryObjectAction
 } from '../../actions';
 
 
@@ -20,6 +22,11 @@ import {
 })
 class ReaderContainer extends Component {
 
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  }
 
   constructor() {
     super();
@@ -33,6 +40,20 @@ class ReaderContainer extends Component {
       return (<ArticleModeContainer />);
     } else {
       return (<CommentModeContainer />)
+    }
+  }
+
+
+  componentDidMount() {
+    const { location } = this.props;
+    const pathname = location.pathname || '';
+    const list = pathname.split('/story/');
+
+    if(list.length > 1) {
+      const storyId = list[1];
+      if(storyId.length > 0) {
+        this.props.dispatch(LoadStoryObjectAction(storyId))
+      }
     }
   }
 
@@ -82,4 +103,4 @@ class ReaderContainer extends Component {
 
 }
 
-export default ReaderContainer;
+export default withRouter(ReaderContainer);

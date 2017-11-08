@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { ListItem, ListItemText, Grid, Icon, Typography } from 'material-ui';
-
 import './Story.css';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import {
   setCurrentlyViewingStoryAction,
@@ -19,6 +20,13 @@ import {
   }
 })
 class Story extends Component {
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  }
+
 
 
   viewStory() {
@@ -36,6 +44,9 @@ class Story extends Component {
         this.props.dispatch(setReaderModeAction('comment'));
       }
     }
+
+    // set url
+    this.props.history.push('/story/' + this.props.story.id)
 
   }
 
@@ -98,4 +109,4 @@ class Story extends Component {
 
 }
 
-export default Story;
+export default withRouter(Story);
