@@ -47,7 +47,7 @@ class ReaderContainer extends Component {
   componentDidMount() {
     const { location } = this.props;
     const pathname = location.pathname || '';
-    const list = pathname.split('/story/');
+    const list = pathname.split('story/');
 
     if(list.length > 1) {
       const storyId = list[1];
