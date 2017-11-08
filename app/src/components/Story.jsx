@@ -22,6 +22,7 @@ class Story extends Component {
 
 
   viewStory() {
+
     this.props.dispatch(setCurrentlyViewingStoryAction(this.props.story));
     this.props.dispatch(markStoryAsViewed(this.props.story.id));
 
@@ -29,6 +30,8 @@ class Story extends Component {
     // The type of item. One of "job", "story", "comment", "poll", or "pollopt".
     if(this.props.story.type !== 'story') {
       this.props.dispatch(setReaderModeAction('comment'));
+    } else {
+      this.props.dispatch(setReaderModeAction('article'));
     }
 
   }

@@ -23,8 +23,10 @@ class CommentModeContainer extends Component {
   // }
 
   getComments() {
+    console.log('here...', this.props.currentlyViewingStory);
     let list = [];
     if(this.props.currentlyViewingStory.kids) {
+      console.log('inside...');
       for(let i = 0; i < this.props.currentlyViewingStory.kids.length; ++i) {
         list.push(<CommentItem key={this.props.currentlyViewingStory.kids[i]} commentId={this.props.currentlyViewingStory.kids[i]} level={1} />)
       }

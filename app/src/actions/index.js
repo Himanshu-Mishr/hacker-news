@@ -10,6 +10,7 @@ import {
   MARK_STORY_VIEWED,
   MARK_STORY_UNVIEWED,
   SET_CURRENT_STORY,
+  UNSET_CURRENT_STORY,
   SET_READER_MODE, 
   SET_DEFAULT_READER_MODE,
   FETCH_STORY_OBJECT_REQUEST,
@@ -108,6 +109,16 @@ export const unMarkStoryAsViewed = function(id) {
 export const setCurrentlyViewingStoryAction = function(story) {
   return function action(dispatch, getState) {
     dispatch({type : SET_CURRENT_STORY, payload : story});
+   };
+};
+
+/**
+ * unset currently viewing story
+ * @param {string} mode 
+ */
+export const unsetCurrentlyViewingStoryAction = function() {
+  return function action(dispatch, getState) {
+    dispatch({type : UNSET_CURRENT_STORY});
    };
 };
 

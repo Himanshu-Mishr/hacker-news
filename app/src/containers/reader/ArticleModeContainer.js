@@ -50,19 +50,23 @@ class ArticleModeContainer extends Component {
       });
   }
 
-  // NOTE : Don't know why this was here.
-  // componentWillReceiveProps(newProps) {
-  //   this.loadContent(newProps.currentlyViewingStory.url);
-  // }
 
+  // ths works on desktop
+  componentWillReceiveProps(newProps) {
+    this.loadContent(newProps.currentlyViewingStory.url);
+  }
+
+
+  // this works on mobile
   componentDidMount() {
     if(this.props.currentlyViewingStory) {
       this.loadContent(this.props.currentlyViewingStory.url);
     }
   }
 
+
   getStoryInfo() {
-    if(this.state.content) {
+    if(Object.keys(this.props.currentlyViewingStory).length) {
       return (
         <div style={{width:"100%",paddingTop:'10px'}}>
           <table style={{paddingLeft:'10px'}}>
@@ -101,19 +105,21 @@ class ArticleModeContainer extends Component {
     if(this.state.isFetching&&this.props.currentlyViewingStory.id) {
       return (
         <div>
+          {this.getStoryInfo()}
+          <Divider light />
           <LinearProgress />
         </div>
       );
     }
 
     return (
-      <Typography className="article-view">
+      <div className="article-view">
         {this.getStoryInfo()}
         <Divider light />
         <div>
         {this.state.content}
         </div>
-      </Typography>
+      </div>
 
     );
   }

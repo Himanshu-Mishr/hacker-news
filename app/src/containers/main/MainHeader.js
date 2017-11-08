@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Paper, Tabs, Tab} from 'material-ui';
 import { connect } from 'react-redux';
 import logo from '../../logo.png';
-import { Hidden, IconButton, Menu, MenuItem, Icon } from 'material-ui';
+import { Hidden, IconButton, Menu, MenuItem, Icon, Typography } from 'material-ui';
 
 import {
   setStoryModeAction,
@@ -52,12 +52,12 @@ class MainHeader extends Component {
       }
       case 5 : {
         this.setStoryMode('askstories');
-        this.setReaderMode('discussion');
+        this.setReaderMode('comment');
         break;
       }
       case 6 : {
         this.setStoryMode('jobstories');
-        this.setReaderMode('discussion');
+        this.setReaderMode('comment');
         break;
       }
       default : {
@@ -142,6 +142,25 @@ class MainHeader extends Component {
   };
 
 
+
+  getStoryModeName() {
+    switch(this.props.storyMode) {
+      case 'topstories':
+        return 'Top Stories'
+      case 'newstories':
+        return 'New Stories'
+      case 'beststories':
+        return 'Best Stories'
+      case 'showstories':
+        return 'Show Stories'
+      case 'askstories':
+        return 'Ask Stories'
+      case 'jobsstories':
+        return 'Jobs Stories'
+    }
+  }
+
+
   render() {
     return (
       
@@ -153,6 +172,12 @@ class MainHeader extends Component {
             <span>
               {this.getLogo()}
             </span>
+
+            <span style={{top:'0',position:'absolute',padding:'16px'}}>
+            {this.getStoryModeName()}
+            </span>
+
+            
             <span style={{float:'right',margin:'-8px'}}>
               <IconButton
                 aria-owns={this.state.open ? 'simple-menu' : null}
@@ -191,9 +216,9 @@ class MainHeader extends Component {
             <Tab label="Top" />
             <Tab label="New" />
             <Tab label="Best" />
-            <Tab label="show" />
-            <Tab label="ask" />
-            <Tab label="jobs" />
+            <Tab label="Show" />
+            <Tab label="Ask" />
+            <Tab label="Jobs" />
           </Tabs>
         </Hidden>
       </Paper>

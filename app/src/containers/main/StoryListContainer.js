@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import StoryItem from '../../components/StoryItem';
 import {List, ListItem, ListItemText, Avatar, Icon, LinearProgress} from 'material-ui';
 import './StoryListContainer.css';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
 import {

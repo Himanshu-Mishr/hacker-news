@@ -8,7 +8,8 @@ import Slide from 'material-ui/transitions/Slide';
 
 
 import {
-  setCurrentlyViewingStoryAction
+  setCurrentlyViewingStoryAction,
+  unsetCurrentlyViewingStoryAction
 } from '../../actions';
 
 
@@ -37,19 +38,25 @@ class ReaderContainer extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if(this.props.currentlyViewingStory.id !== newProps.currentlyViewingStory.id) {
-      this.setState({open : true});
+
+    // allow only when new props is not empty 
+    if(Object.keys(newProps.currentlyViewingStory).length) {
+      if(this.props.currentlyViewingStory.id !== newProps.currentlyViewingStory.id) {
+        this.setState({open : true});
+      } else {}
     }
   }
 
   // unset currently viewing story config 
   handleRequestClose() {
     this.setState({open : false});
-    // this.props.dispatch(setCurrentlyViewingStoryAction({}));
+    this.props.dispatch(unsetCurrentlyViewingStoryAction());
   }
   
 
   render() {
+
+
     return (
       <div>
         {/* for bigger screen like desktop and tablet */}

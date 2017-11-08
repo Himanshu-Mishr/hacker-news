@@ -9,6 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 
 
+
 // to override default theme palette
 const theme = createMuiTheme({
   palette: {
