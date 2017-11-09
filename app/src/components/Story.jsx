@@ -45,7 +45,8 @@ class Story extends Component {
       }
     }
 
-    // set url
+    // reset and set url
+    this.props.history.push('')
     this.props.history.push('story/' + this.props.story.id)
 
   }
