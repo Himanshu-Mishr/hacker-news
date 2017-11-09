@@ -175,7 +175,7 @@ class MainHeader extends Component {
               {this.getLogo()}
             </span>
 
-            <span style={{top:'0',position:'absolute',padding:'16px'}}>
+            <span style={{top:'0',fontSize:'17px',position:'absolute',padding:'16px'}}>
             {this.getStoryModeName()}
             </span>
 

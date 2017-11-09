@@ -57,7 +57,7 @@ class CommentItem extends Component {
 
   getPrimaryContent() {
     return (
-      <div style={{color:'#757575'}}>
+      <div style={{color:'#757575',marginTop:'-20px'}}>
         by {this.getCommentorName()} {this.getReadableTime()}
 
         <IconButton onClick={() => this.handleCollapse()}>
@@ -74,7 +74,8 @@ class CommentItem extends Component {
 
 
   getSecondaryContent() {
-    return (<span style={{color:'black'}} dangerouslySetInnerHTML={{__html : this.state.story.text}}></span>)
+    if(this.state.open)
+      return (<span style={{color:'black'}} dangerouslySetInnerHTML={{__html : this.state.story.text}}></span>)
   }
 
 
