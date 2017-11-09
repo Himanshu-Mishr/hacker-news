@@ -4,7 +4,7 @@ import { Button, Paper, Hidden } from 'material-ui';
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 import newspaper from '../../newspaper.svg';
-
+import ReactGA from 'react-ga';
 import {
   setReaderModeAction
 } from '../../actions';
@@ -18,6 +18,16 @@ import {
 class ReaderHeader extends Component {
 
   setReaderMode(mode) {
+
+    // register event : (toggle load, mode)
+    ReactGA.event({
+      category: 'Navigation',
+      action: 'Toggle reader',
+      value: mode,
+      label: 'ReaderHeader'
+    });
+
+
     this.props.dispatch(setReaderModeAction(mode));
   }
 

@@ -5,7 +5,7 @@ import { ListItem, ListItemText, Grid, Icon, Typography } from 'material-ui';
 import './Story.css';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-
+import ReactGA from 'react-ga';
 import {
   setCurrentlyViewingStoryAction,
   markStoryAsViewed,
@@ -38,16 +38,47 @@ class Story extends Component {
     // The type of item. One of "job", "story", "comment", "poll", or "pollopt".
     if(this.props.story.type !== 'story') {
       this.props.dispatch(setReaderModeAction('comment'));
+
+      // register event : (reader load, mode)
+      ReactGA.event({
+        category: 'Navigation',
+        action: 'Reader load',
+        value: 'comment',
+        label: 'Story'
+      });
+
+
     } else {
       let title = (this.props.story.title || '').toLowerCase();
       if(title.indexOf('ask hn') > -1) {
         this.props.dispatch(setReaderModeAction('comment'));
+
+        // register event : (reader load, mode)
+        ReactGA.event({
+          category: 'Navigation',
+          action: 'Reader load',
+          value: 'comment',
+          label: 'Story'
+        });
+
+
       }
     }
+
+    // register event : (open story, mode)
+    ReactGA.event({
+      category: 'Navigation',
+      action: 'Open story',
+      value: this.props.story.id,
+      label: 'Story'
+    });
+
 
     // reset and set url
     this.props.history.push('')
     this.props.history.push('story/' + this.props.story.id)
+
+    
 
   }
 

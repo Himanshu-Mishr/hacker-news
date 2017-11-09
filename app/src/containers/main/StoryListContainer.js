@@ -4,7 +4,7 @@ import StoryItem from '../../components/StoryItem';
 import {List, ListItem, ListItemText, Avatar, Icon, LinearProgress} from 'material-ui';
 import './StoryListContainer.css';
 import { withStyles } from 'material-ui/styles';
-
+import ReactGA from 'react-ga';
 import {
   fetchStoryListAction
 } from '../../actions';
@@ -20,7 +20,8 @@ const styles = theme => ({
 
 @connect((store, action) => {
   return {
-    storyIdList : store.storyIdList
+    storyIdList : store.storyIdList,
+    storyMode : store.storyMode
   }
 })
 class StoryListContainer extends Component {
@@ -43,6 +44,16 @@ class StoryListContainer extends Component {
 
   // init
   componentDidMount() {
+
+    // register event : (initial load, mode)
+    ReactGA.event({
+      category: 'App Load',
+      action: 'Initial load',
+      value: this.props.storyMode,
+      label: 'StoryListContainer'
+    });
+
+
     this.props.dispatch(fetchStoryListAction());
   }
 
@@ -70,6 +81,16 @@ class StoryListContainer extends Component {
   handleLoadNext() {
     const newSkip = this.state.skip + 20;
     const storiesVisible = this.state.storiesVisible.concat(this.props.storyIdList.list.slice(newSkip, this.state.limit+newSkip));
+
+    // register event : (load more, #count)
+    ReactGA.event({
+      category: 'Pagination',
+      action: 'Load more',
+      value: newSkip,
+      label: 'StoryListContainer'
+    });
+    
+
     this.setState({skip : newSkip, storiesVisible});
   }
 

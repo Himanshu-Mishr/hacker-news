@@ -3,7 +3,7 @@ import {Paper, Tabs, Tab} from 'material-ui';
 import { connect } from 'react-redux';
 import logo from '../../logo.png';
 import { Hidden, IconButton, Menu, MenuItem, Icon} from 'material-ui';
-
+import ReactGA from 'react-ga';
 import {
   setStoryModeAction,
   setReaderModeAction,
@@ -111,10 +111,30 @@ class MainHeader extends Component {
   }
   
   setStoryMode(mode) {
+
+    // register event : (story load, mode)
+    ReactGA.event({
+      category: 'Navigation',
+      action: 'Story load',
+      value: mode,
+      label: 'MainHeader'
+    });
+
+    
     this.props.dispatch(setStoryModeAction(mode));
   }
 
   setReaderMode(mode) {
+
+    // register event : (reader load, mode)
+    ReactGA.event({
+      category: 'Navigation',
+      action: 'Reader load',
+      value: mode,
+      label: 'MainHeader'
+    });
+
+
     this.props.dispatch(setReaderModeAction(mode));
   }
 

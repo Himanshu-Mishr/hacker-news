@@ -6,7 +6,7 @@ import { ListItem, ListItemText, IconButton } from 'material-ui';
 import './CommentItem.css';
 import Collapse from 'material-ui/transitions/Collapse';
 import Icon from 'material-ui/Icon';
-
+import ReactGA from 'react-ga';
 
 @connect((store, action) => {
   return {
@@ -96,6 +96,30 @@ class CommentItem extends Component {
 
 
   handleCollapse() {
+
+    // true -> open
+    // false -> collpase
+    if(!this.state.open) {
+      // register event : (expand comment, level)
+      ReactGA.event({
+        category: 'Navigation',
+        action: 'Expand comment',
+        value: this.props.level,
+        label: 'CommentItem'
+      });
+    } else {
+      // register event : (collapse comment, level)
+      ReactGA.event({
+        category: 'Navigation',
+        action: 'Collapse comment',
+        value: this.props.level,
+        label: 'CommentItem'
+      });
+      
+    }
+
+
+
     this.setState({ open: !this.state.open });
   }
 

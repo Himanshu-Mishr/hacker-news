@@ -9,6 +9,9 @@ import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 import { HashRouter } from 'react-router-dom'
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-108872301-1');
+// ReactGA.pageview(window.location.pathname + window.location.search);
 
 // to override default theme palette
 const theme = createMuiTheme({
